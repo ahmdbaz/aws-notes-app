@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AMB Notes — A Quiet Place to Think</title>
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="apple-touch-icon" href="favicon.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="grain"></div>
+
+    <main class="stage">
+      <!-- ========== SCREEN 1 — AUTH ========== -->
+      <section id="screen-auth" class="screen active">
+        <div class="card">
+          <header class="card-head">
+            <div class="brand">
+              <span class="brand-mark" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M7 3h7l5 5v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M14 3v4a2 2 0 0 0 2 2h3"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M8.5 13h7M8.5 16.5h4.5"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </span>
+              <span class="brand-text">AMB Notes</span>
+            </div>
+            <p class="kicker">
+              A quiet place — for the thoughts you keep returning to.
+            </p>
+          </header>
+
+          <div class="tabs" role="tablist">
+            <button class="tab active" data-tab="signup" role="tab">
+              Sign up
+            </button>
+            <button class="tab" data-tab="login" role="tab">Login</button>
+            <span class="tab-indicator"></span>
+          </div>
+
+          <!-- Signup form -->
+          <form id="form-signup" class="form active" autocomplete="off">
+            <label class="field">
+              <span class="field-label">Email</span>
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="you@somewhere.com"
+              />
+            </label>
+            <label class="field">
+              <span class="field-label">Password</span>
+              <input
+                type="password"
+                name="password"
+                required
+                minlength="8"
+                placeholder="At least 8 characters"
+              />
+            </label>
+            <label class="field">
+              <span class="field-label">Confirm password</span>
+              <input
+                type="password"
+                name="confirm"
+                required
+                minlength="8"
+                placeholder="Type it again"
+              />
+            </label>
+            <button type="submit" class="btn btn-primary">
+              <span>Create account</span>
+              <span class="arrow">→</span>
+            </button>
+            <p class="form-msg" data-for="signup"></p>
+          </form>
+
+          <!-- Login form -->
+          <form id="form-login" class="form" autocomplete="off">
+            <label class="field">
+              <span class="field-label">Email</span>
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="you@somewhere.com"
+              />
+            </label>
+            <label class="field">
+              <span class="field-label">Password</span>
+              <input
+                type="password"
+                name="password"
+                required
+                placeholder="••••••••"
+              />
+            </label>
+            <button type="submit" class="btn btn-primary">
+              <span>Continue</span>
+              <span class="arrow">→</span>
+            </button>
+            <p class="form-msg" data-for="login"></p>
+          </form>
+        </div>
+      </section>
+
+      <!-- ========== SCREEN 2 — VERIFICATION ========== -->
+      <section id="screen-verify" class="screen">
+        <div class="card card-narrow">
+          <header class="card-head">
+            <div class="seal">✉</div>
+            <h1 class="card-title"><em>Almost</em> there.</h1>
+            <p class="kicker">Check your email for the verification code.</p>
+          </header>
+
+          <form id="form-verify" class="form active" autocomplete="off">
+            <label class="field code-field">
+              <span class="field-label">Six-digit code</span>
+              <input
+                type="text"
+                name="code"
+                required
+                inputmode="numeric"
+                pattern="[0-9]{6}"
+                maxlength="6"
+                placeholder="••••••"
+                class="code-input"
+              />
+            </label>
+            <button type="submit" class="btn btn-primary">
+              <span>Verify</span>
+              <span class="arrow">→</span>
+            </button>
+            <p class="form-msg" data-for="verify"></p>
+          </form>
+
+          <button class="link-btn" id="back-to-auth">← Back to sign in</button>
+        </div>
+      </section>
+
+      <!-- ========== SCREEN 3 — NOTES ========== -->
+      <section id="screen-notes" class="screen">
+        <div class="notes-shell">
+          <header class="notes-header">
+            <div class="notes-title-block">
+              <span class="overline">Your collection</span>
+              <h1 class="notes-title">My <em>Notes</em></h1>
+            </div>
+            <button id="logout-btn" class="btn btn-ghost">
+              <span>Log out</span>
+              <span class="arrow">↗</span>
+            </button>
+          </header>
+
+          <section class="composer">
+            <div class="composer-meta">
+              <span class="dot"></span>
+              <span class="composer-label">New entry</span>
+              <span class="composer-date" id="today-date"></span>
+            </div>
+            <textarea
+              id="note-input"
+              placeholder="Write something worth keeping…"
+              rows="4"
+            ></textarea>
+            <div class="composer-foot">
+              <span class="char-count" id="char-count">0 characters</span>
+              <button id="add-note-btn" class="btn btn-primary btn-compact">
+                <span>Add note</span>
+                <span class="arrow">+</span>
+              </button>
+            </div>
+          </section>
+
+          <section class="notes-list-wrap">
+            <div class="list-head">
+              <h2 class="list-title">Recent</h2>
+              <span class="list-count" id="notes-count">—</span>
+            </div>
+            <ul id="notes-list" class="notes-list"></ul>
+            <div id="notes-empty" class="empty-state" hidden>
+              <span class="empty-mark">⌁</span>
+              <p>Nothing yet. Your first note is one breath away.</p>
+            </div>
+            <div id="notes-loading" class="loading-state">
+              <span class="loader"></span>
+              <p>Gathering your notes…</p>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-foot">
+      <span class="foot-line"></span>
+      <span>Made by <strong>Ahmed Mohammed Baz</strong></span>
+      <span class="foot-line"></span>
+    </footer>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
